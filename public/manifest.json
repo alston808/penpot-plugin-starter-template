@@ -1,6 +1,6 @@
 {
-  "name": "Penpot starter plugin",
+  "name": "Penpot AI Layout",
   "code": "plugin.js",
-  "description": "This is a starter plugin for Penpot",
-  "permissions": ["content:read", "content:write"]
+  "description": "Generate multi-layout design variations from text prompts using AI",
+  "permissions": ["content:read", "content:write", "library:read", "library:write"]
 }

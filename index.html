@@ -3,22 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Penpot plugin example</title>
+    <title>Penpot AI Layout</title>
   </head>
   <body>
-    <p>Penpot plugin starter template</p>
+    <div class="plugin-container">
+      <header class="plugin-header">
+        <h1 class="plugin-title">🎨 AI Layout Generator</h1>
+        <p class="plugin-subtitle">Generate multi-layout design variations from text prompts</p>
+      </header>
 
-    <p>
-      Checkout the
-      <a target="_blank" href="https://help.penpot.app/plugins/"
-        >documentation</a
-      >
-      to get started.
-    </p>
+      <div class="input-section">
+        <div class="form-group">
+          <label for="frame-select" class="form-label">Target Frame</label>
+          <select id="frame-select" class="form-select">
+            <!-- Options populated by JavaScript -->
+          </select>
+        </div>
 
-    <button type="button" data-appearance="primary" data-handler="create-text">
-      Create text
-    </button>
+        <div class="form-group">
+          <label for="prompt-input" class="form-label">Design Prompt</label>
+          <textarea
+            id="prompt-input"
+            class="form-textarea"
+            placeholder="Describe the layout you want to create (e.g., 'A modern dashboard with sidebar, header, and content area')"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <button id="generate-btn" class="generate-btn" disabled>
+          <span id="loading-spinner" class="loading-spinner" style="display: none;">⟳</span>
+          Generate Layouts
+        </button>
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+      </div>
+
+      <details class="settings-section">
+        <summary class="settings-toggle">⚙️ Settings</summary>
+        <div class="settings-content">
+          <div class="form-group">
+            <label for="api-key-input" class="form-label">OpenRouter API Key</label>
+            <input
+              type="password"
+              id="api-key-input"
+              class="form-input"
+              placeholder="Enter your OpenRouter API key"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="model-select" class="form-label">AI Model</label>
+            <select id="model-select" class="form-select">
+              <!-- Options populated by JavaScript -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Model Type</label>
+            <div class="toggle-container">
+              <button id="free-models-btn" class="toggle-btn active">Free</button>
+              <button id="paid-models-btn" class="toggle-btn">Paid</button>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <div id="layouts-grid" class="layouts-grid">
+        <!-- Layout cards populated by JavaScript -->
+      </div>
+    </div>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

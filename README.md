@@ -1,141 +1,164 @@
-# Penpot Plugin Starter Template
+# Penpot AI Layout Generator
 
-This repository is designed to be your starting point for creating plugins for Penpot. It includes everything you need to get started quickly with development and build processes, so you can focus solely on coding. The template uses Vite as the bundler and comes pre-configured with TypeScript, though you can write your code in vanilla JavaScript if you prefer, while keeping TypeScript to handle Penpot typings in the `plugin.ts` file.
+🎨 **Generate multi-layout design variations from text prompts using AI**
 
-## Pre-requisites
+This Penpot plugin uses OpenRouter to power AI-driven layout generation, allowing you to create multiple design variations from simple text descriptions. The plugin features a beautiful dark glass interface with rainbow accents and provides both free and paid AI model options.
 
-- Node.js and npm (<a href="https://nodejs.org/en/download/package-manager" target="_blank">Download</a>).
-- Git (<a href="https://git-scm.com/downloads" target="_blank">Download</a>).
-- Visual Studio Code (<a href="https://code.visualstudio.com/download" target="_blank">Download</a>) or similar.
-- Basic HTML, CSS and javascript knowledge.
+## ✨ Features
 
-## Folders and Files
+- **AI-Powered Layout Generation**: Generate multiple layout variations from text prompts
+- **Multiple AI Models**: Choose from free models (Claude 3 Haiku, Llama, etc.) or paid models (GPT-4o, Claude 3.5 Sonnet, etc.)
+- **Dark Glass UI**: Beautiful interface with rainbow gradient backgrounds and glassmorphism effects
+- **Frame Integration**: Apply generated layouts directly to selected Penpot frames
+- **Settings Persistence**: API keys and model preferences are saved locally
+- **Responsive Design**: Works seamlessly in Penpot's plugin panel
 
-- **`/`**: the root directory containing important files like `index.html`, the entry point for your plugin, along with configuration files such as `tsconfig.json` or `package.json`.
+## 🚀 Quick Start
 
-- **`public/`**: includes static assets like `manifest.json` for plugin metadata.
+### Prerequisites
 
-- **`src/`**: contains the core source files for your plugin.
+- Node.js and npm
+- Git
+- A Penpot account
+- An OpenRouter API key (get one at [openrouter.ai](https://openrouter.ai))
 
-- **`node_modules/`**: contains external dependencies used for development, installed via npm.
+### Installation
 
-- **`dist/`**: the output directory generated after the build process, containing the production-ready plugin files for deployment.
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd penpot-plugin
+   ```
 
-### What is typescript?
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-TypeScript is like JavaScript with extra rules. These rules help you catch mistakes early, before you run your code. It makes your code more reliable and easier to manage, especially in big projects.
+3. **Start development server:**
+   ```bash
+   npm run dev
+   ```
 
-We're using TypeScript to make working with the Penpot API easier, as it provides autocompletion and instant access to documentation.
+4. **Load in Penpot:**
+   - Open Penpot and press `Ctrl + Alt + P` to open Plugin Manager
+   - Enter manifest URL: `http://localhost:4400/manifest.json`
+   - Install and use the plugin
 
-### What are plugin.ts and plugin.js files?
+## ⚙️ Configuration
 
-The `plugin.ts` file is where you write code to interact with the Penpot API using TypeScript. This file is then compiled into `plugin.js` which is the final JavaScript code that runs the plugin. You don't write `plugin.js` directly; it's generated from the `plugin.ts` file.
+### API Key Setup
 
-**Note that this is also the only file where you can use the Penpot object.** Do not try to use the Penpot object in your plugin interface scripts.
+1. Get your API key from [OpenRouter](https://openrouter.ai/keys)
+2. Open the plugin's settings panel (click "⚙️ Settings")
+3. Enter your API key in the "OpenRouter API Key" field
+4. The key is stored locally in your browser
 
-### What is manifest.json file?
+### Model Selection
 
-The `manifest.json` file contains the basic information about the plugin. It defines the plugin's name, description, the main code file, and the permissions it requires. The structure of the `manifest.json` file looks like this:
+Choose between **Free** and **Paid** models:
 
-```json
-{
-  "name": "Your plugin name",
-  "description": "Your plugin description",
-  "code": "plugin-file.js",
-  "icon": "your-icon.png",
-  "permissions": [
-    "content:read",
-    "content:write",
-    "library:read",
-    "library:write",
-    "user:read"
-  ]
-}
+**Free Models:**
+- Claude 3 Haiku (Anthropic)
+- Llama 3.2 3B (Meta)
+- WizardLM-2 8x22B (Microsoft)
+- Gemma 7B (Google)
+
+**Paid Models:**
+- Claude 3.5 Sonnet (Anthropic)
+- GPT-4o (OpenAI)
+- GPT-4o Mini (OpenAI)
+- Claude 3 Opus (Anthropic)
+- Gemini Pro (Google)
+
+## 📖 Usage
+
+1. **Select a Frame:** Choose a target frame from your Penpot design
+2. **Enter Prompt:** Describe the layout you want (e.g., "A modern dashboard with sidebar, header, and content area")
+3. **Configure Settings:** Set your API key and choose an AI model
+4. **Generate:** Click "Generate Layouts" to create variations
+5. **Apply:** Review the generated layouts and click "Apply Layout" on your favorite
+
+## 🛠️ Development
+
+### Project Structure
+
+```
+penpot-plugin/
+├── index.html          # Main UI layout
+├── src/
+│   ├── main.ts         # Frontend logic and UI interactions
+│   ├── plugin.ts       # Penpot API integration and AI calls
+│   └── style.css       # Dark glass theme with rainbow accents
+├── public/
+│   └── manifest.json   # Plugin metadata and permissions
+└── package.json        # Dependencies and scripts
 ```
 
-This file is essential for the plugin to function correctly within Penpot.
+### Key Technologies
 
-## Getting Started
+- **TypeScript**: Type-safe development
+- **Vite**: Fast build tool and dev server
+- **Penpot Plugin API**: Integration with Penpot
+- **OpenRouter API**: AI model access
+- **CSS Glassmorphism**: Modern UI effects
 
-[![Watch the video how to use starter template](https://penpot.github.io/penpot-plugin-starter-template/plugin-starter-template.png)](https://penpot.github.io/penpot-plugin-starter-template/plugin-starter-template.mp4)
-
-### Use this template
-
-Click the "Use this template" button at the top of the GitHub repository page. That'll create a new repository in your account with all the template files.
-
-Now that your repository was created you can clone it in your machine to start working with it:
-
-```bash
-git clone <your-repository-url>
-```
-
-### Install Dependencies
-
-After cloning the repository, navigate into the project directory and install the necessary dependencies by running:
-
-```bash
-cd <your-project-name>
-npm install
-```
-
-This command installs all the required packages listed in the `package.json` file.
-
-### Configure the Plugin
-
-Next, you need to edit the plugin's configuration file:
-
-1. Open the `manifest.json` file located in the `/public` folder.
-2. Make any necessary changes to your `plugin.ts`file. Note that any modifications to this file require you to restart the development server for changes to take effect. You can check our repository <a href="https://github.com/penpot/penpot-plugins-samples" target="_blank">Penpot plugins samples</a> for specific examples.
-
-### Run the Development Server
-
-To start the development server, run the following command in your terminal:
-
-```bash
-npm run dev
-```
-
-Once the server is running, open your web browser and go to `http://localhost:4400` to view your plugin in action. Now it is ready to be loaded in Penpot with the url `http://localhost:4400/manifest.json`.
-
-### Load your local plugin
-
-To load and test your local plugin running on `http://localhost:4400`, follow these steps:
-
-1. **Open the Plugin Manager:** Use the shortcut `Ctrl + Alt + P` in any file to open the Plugin Manager modal.
-
-2. **Enter the manifest URL:** In the Plugin Manager, provide the URL for your local plugin's manifest file. For a local setup, this URL will be: `http://localhost:4400/manifest.json`.
-
-3. **Install the plugin:** After entering the URL, Penpot will attempt to install the plugin. If there are no issues, the plugin will be successfully installed.
-
-4. **Access the plugin:** Once installed, you can open and use the plugin directly from within Penpot whenever you need it.
-
-## Development
-
-### Technologies Used
-
-This plugin template uses several key technologies:
-
-- **TypeScript**
-- **Vite**
-- **Web Components**
-
-### Libraries Included
-
-The template includes two Penpot libraries to assist in your development:
-
-- `@penpot/plugin-styles`: <a href="https://www.npmjs.com/package/@penpot/plugin-styles" target="_blank">This library</a> provides utility functions and resources to help you style your components consistently with Penpot's design system.
-- `@penpot/plugin-types`: <a href="https://www.npmjs.com/package/@penpot/plugin-types" target="_blank">This library</a> includes types and API descriptions for interacting with the Penpot plugin API, facilitating the development of plugins that can communicate effectively with the Penpot app.
-
-## Deployment
-
-### Build your plugin
+### Building for Production
 
 ```bash
 npm run build
 ```
 
-### Deploy your plugin
+The built files will be in the `dist/` directory, ready for deployment.
 
-After successfully building your plugin, now you're ready to use your chosen platform to deploy it.
+## 🔧 API Permissions
 
-Check our <a href="https://help.penpot.app/plugins/deployment/" target="_blank">Deployment guide</a> for more information about how to deploy your plugin in multiple platforms.
+The plugin requires these Penpot permissions:
+- `content:read` - Read design content
+- `content:write` - Create and modify design elements
+- `library:read` - Access design libraries
+- `library:write` - Modify design libraries
+
+## 🎨 UI Features
+
+- **Rainbow Gradient Background**: Animated background with full spectrum colors
+- **Glassmorphism Effects**: Translucent panels with backdrop blur
+- **Responsive Design**: Adapts to plugin panel size
+- **Theme Support**: Automatically matches Penpot's light/dark theme
+- **Smooth Animations**: Hover effects and loading states
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly in Penpot
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🆘 Troubleshooting
+
+**Plugin not loading?**
+- Ensure the dev server is running on port 4400
+- Check that the manifest URL is correct in Plugin Manager
+- Verify all dependencies are installed
+
+**AI generation failing?**
+- Confirm your OpenRouter API key is valid
+- Check your internet connection
+- Try switching to a different AI model
+
+**Layouts not applying?**
+- Ensure you have a frame selected
+- Check that the target frame exists and is accessible
+- Try refreshing the plugin
+
+## 📚 Resources
+
+- [Penpot Plugin Documentation](https://help.penpot.app/plugins/)
+- [Penpot Plugin Samples](https://github.com/penpot/penpot-plugins-samples)
+- [OpenRouter API Docs](https://openrouter.ai/docs)
+- [Penpot Community](https://community.penpot.app/)
