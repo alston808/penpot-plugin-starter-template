@@ -56,20 +56,12 @@ This Penpot plugin uses OpenRouter to power AI-driven layout generation, allowin
 
 ### Model Selection
 
-Choose between **Free** and **Paid** models:
+The plugin dynamically loads available models from OpenRouter based on your API key. Choose between **Free** and **Paid** models:
 
-**Free Models:**
-- Claude 3 Haiku (Anthropic)
-- Llama 3.2 3B (Meta)
-- WizardLM-2 8x22B (Microsoft)
-- Gemma 7B (Google)
+- **Free Models**: Zero-cost models available to all users
+- **Paid Models**: Premium models with usage-based pricing
 
-**Paid Models:**
-- Claude 3.5 Sonnet (Anthropic)
-- GPT-4o (OpenAI)
-- GPT-4o Mini (OpenAI)
-- Claude 3 Opus (Anthropic)
-- Gemini Pro (Google)
+Available models are automatically populated when you enter your OpenRouter API key in the settings panel.
 
 ## 📖 Usage
 
