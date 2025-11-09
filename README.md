@@ -17,7 +17,7 @@ This Penpot plugin uses OpenRouter to power AI-driven layout generation, allowin
 
 ### Prerequisites
 
-- Node.js and npm
+- [Bun](https://bun.sh/) (recommended) or Node.js with npm
 - Git
 - A Penpot account
 - An OpenRouter API key (get one at [openrouter.ai](https://openrouter.ai))
@@ -32,12 +32,12 @@ This Penpot plugin uses OpenRouter to power AI-driven layout generation, allowin
 
 2. **Install dependencies:**
    ```bash
-   npm install
+   bun install
    ```
 
 3. **Start development server:**
    ```bash
-   npm run dev
+   bun run dev
    ```
 
 4. **Load in Penpot:**
@@ -106,10 +106,53 @@ penpot-plugin/
 ### Building for Production
 
 ```bash
-npm run build
+bun run build
 ```
 
 The built files will be in the `dist/` directory, ready for deployment.
+
+## 🚀 Deployment
+
+### Cloudflare Pages Deployment
+
+This plugin is configured for easy deployment on Cloudflare Pages:
+
+#### Option 1: Direct Upload
+```bash
+bun run build
+# Then upload the `dist/` folder to Cloudflare Pages dashboard
+```
+
+#### Option 2: Using Wrangler CLI
+```bash
+bun add -g wrangler
+bun run deploy
+```
+
+#### Option 3: GitHub Integration
+1. Push your code to GitHub
+2. Connect your repository to Cloudflare Pages
+3. Set build settings:
+   - **Build command**: `bun run build`
+   - **Build output directory**: `dist`
+   - **Root directory**: `/`
+
+### Manual Deployment
+
+For other hosting providers, simply upload the contents of the `dist/` folder to your web server. Ensure your server supports:
+
+- Serving static files
+- Proper CORS headers (configured in `_headers`)
+- HTTPS (required for Penpot plugins)
+
+### Plugin Installation URL
+
+After deployment, your plugin will be available at:
+```
+https://your-domain.pages.dev/manifest.json
+```
+
+Load this URL in Penpot's Plugin Manager (Ctrl+Alt+P).
 
 ## 🔧 API Permissions
 

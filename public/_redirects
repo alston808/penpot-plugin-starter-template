@@ -1,0 +1,3 @@
+# Redirect rules for Cloudflare Pages
+/manifest.json  /manifest.json   200
+/plugin.js      /plugin.js       200

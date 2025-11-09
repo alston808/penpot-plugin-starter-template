@@ -19,7 +19,7 @@ penpot.ui.onMessage((message: any) => {
 });
 
 // Generate AI-powered layout variations
-async function generateAILayouts(prompt: string, targetFrame: string, apiKey: string, model: string) {
+async function generateAILayouts(prompt: string, _targetFrame: string, apiKey: string, model: string) {
   try {
     // Call OpenRouter API to generate layout suggestions
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -59,7 +59,7 @@ async function generateAILayouts(prompt: string, targetFrame: string, apiKey: st
   } catch (error) {
     penpot.ui.sendMessage({
       type: "error",
-      message: `Failed to generate layouts: ${error.message}`,
+      message: `Failed to generate layouts: ${error instanceof Error ? error.message : String(error)}`,
     });
   }
 }
@@ -68,7 +68,7 @@ async function generateAILayouts(prompt: string, targetFrame: string, apiKey: st
 function applySelectedLayout(layoutData: any, targetFrameId: string) {
   try {
     // Find the target frame
-    const targetFrame = penpot.root.findNode(targetFrameId);
+    const targetFrame = penpot.root && (penpot.root as any).findNode ? (penpot.root as any).findNode(targetFrameId) : null;
     if (!targetFrame) {
       penpot.ui.sendMessage({
         type: "error",
@@ -78,9 +78,11 @@ function applySelectedLayout(layoutData: any, targetFrameId: string) {
     }
 
     // Clear existing content
-    targetFrame.children.forEach((child: any) => {
-      child.remove();
-    });
+    if ((targetFrame as any).children) {
+      (targetFrame as any).children.forEach((child: any) => {
+        child.remove();
+      });
+    }
 
     // Create the layout structure based on layoutData
     const board = penpot.createBoard();
@@ -112,7 +114,7 @@ function applySelectedLayout(layoutData: any, targetFrameId: string) {
   } catch (error) {
     penpot.ui.sendMessage({
       type: "error",
-      message: `Failed to apply layout: ${error.message}`,
+      message: `Failed to apply layout: ${error instanceof Error ? error.message : String(error)}`,
     });
   }
 }
@@ -143,8 +145,10 @@ function createElementFromData(elementData: any): any {
 
     case "text":
       const text = penpot.createText(elementData.content || "Sample text");
-      if (elementData.fontSize) text.fontSize = elementData.fontSize;
-      if (elementData.fontFamily) text.fontFamily = elementData.fontFamily;
+      if (text) {
+        if (elementData.fontSize) text.fontSize = elementData.fontSize;
+        if (elementData.fontFamily) text.fontFamily = elementData.fontFamily;
+      }
       return text;
 
     case "ellipse":
@@ -173,9 +177,9 @@ function getAvailableFrames(): any[] {
   const frames: any[] = [];
 
   // Get frames from the current page
-  if (penpot.root && penpot.root.children) {
-    penpot.root.children.forEach((node: any) => {
-      if (penpot.utils.types.isFrame(node)) {
+  if (penpot.root && (penpot.root as any).children) {
+    (penpot.root as any).children.forEach((node: any) => {
+      if (node && node.type === "frame") {
         frames.push({
           id: node.id,
           name: node.name || "Unnamed Frame",
@@ -188,7 +192,7 @@ function getAvailableFrames(): any[] {
   // If no frames found, check current selection
   if (frames.length === 0 && penpot.selection.length > 0) {
     penpot.selection.forEach((node: any) => {
-      if (penpot.utils.types.isFrame(node)) {
+      if (node && node.type === "frame") {
         frames.push({
           id: node.id,
           name: node.name || "Unnamed Frame",
